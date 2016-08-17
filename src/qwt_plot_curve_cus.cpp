@@ -566,7 +566,7 @@ void QwtPlotCurveCus::drawLines( QPainter *painter,
             QwtPainter::drawPolyline( painter, polyline );
         }
     }
-
+    delete series;
 }
 
 /*!
@@ -810,6 +810,7 @@ void QwtPlotCurveCus::drawSteps( QPainter *painter,
 
     if ( d_data->brush.style() != Qt::NoBrush )
         fillCurve( painter, xMap, yMap, canvasRect, polygon );
+    delete series;
 }
 
 /*!
@@ -880,62 +881,7 @@ void QwtPlotCurveCus::drawNetWorkLines( QPainter *painter,
     int i,j,k;
     int netSize;
     netSize=seriesCus->sample(0).netSize();
-    /*
-    for ( i = from ; i < to; i++ )
-    {
-        for ( j = 0 ; j < netSize; j++ )
-        {
-            int id=seriesCus->sample(i).net(j);
-            if(id!=0)
-            {
-                for ( k = i+1 ; k <= to; k++ )
-                {
-                    if(seriesCus->sample(k).id()==id)
-                    {
 
-                        const QPointF samplei = series->sample( i );
-                        double xi = xMap.transform( samplei.x() );
-                        double yi = yMap.transform( samplei.y() );
-
-                        const QPointF samplek = series->sample( k );
-                        double xk = xMap.transform( samplek.x() );
-                        double yk = yMap.transform( samplek.y() );
-
-                        QwtPainter::drawLine(painter,QPointF(xi,yi),QPointF(xk,yk));
-                        //QwtPainter::drawLine(painter,points.at(i),points.at(k));
-
-                        float x1 = xi;         //lastPoint 起点
-
-                        float y1 = yi;
-
-                        float x2 = xk;           //endPoint 终点
-
-                        float y2 = yk;
-
-                        float dis = sqrt((xi-xk)*(xi-xk)+(yi-yk)*(yi-yk));
-                        float l = dis/8;                 //箭头的那长度
-
-                        float a = 0.5;                       //箭头与线段角度
-
-                        float x3 = x2 - l * cos(atan2((y2 - y1) , (x2 - x1)) - a);
-
-                        float y3 = y2 - l * sin(atan2((y2 - y1) , (x2 - x1)) - a);
-
-                        float x4 = x2 - l * sin(atan2((x2 - x1) , (y2 - y1)) - a);
-
-                        float y4 = y2 - l * cos(atan2((x2 - x1) , (y2 - y1)) - a);
-
-                         QwtPainter::drawLine(painter,x2,y2,x3,y3);
-
-                         QwtPainter::drawLine(painter,x2,y2,x4,y4);
-
-                        //painter.drawLine(lastPoint,endPoint);
-                    }
-                }
-            }
-        }
-
-    }*/
     const int PATH_ID_MAX = 100000;
     for ( i = from ; i < to; i++ )
     {
@@ -1037,7 +983,7 @@ void QwtPlotCurveCus::drawNetWorkLines( QPainter *painter,
 
 
     }
-
+    delete series;
 
 }
 
@@ -1243,6 +1189,7 @@ void QwtPlotCurveCus::drawSymbols( QPainter *painter, const QwtSymbol &symbol,
         if ( points.size() > 0 )
             symbol.drawSymbols( painter, points );
     }
+    delete series;
 }
 
 /*!

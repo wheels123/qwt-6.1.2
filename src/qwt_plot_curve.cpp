@@ -367,8 +367,8 @@ void QwtPlotCurve::drawSeries( QPainter *painter,
           slower when the painter has a brush. So we don't
           set the brush before we really need it.
          */
-
-        drawCurve( painter, d_data->style, xMap, yMap, canvasRect, from, to );
+/*
+        drawCurve( painter, d_data->style, xMap, yMap, canvasRect, from, to );*/
         painter->restore();
 
         int realEnd=to;
